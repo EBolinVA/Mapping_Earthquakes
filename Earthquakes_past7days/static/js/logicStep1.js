@@ -53,9 +53,7 @@ d3.json(earthquakeData).then(function(data) {
     //style: myStyle,
     //onEachFeature: function(feature, layer) {
         //layer.bindPopup("<h3> Neighborhood: " + feature.properties.AREA_NAME + "</h3>") 
-            }
             
-        })
-        .addTo(map);
-
-});
+            
+        }).addTo(map);
+    });
