@@ -169,26 +169,25 @@ legend.onAdd = function() {
 
   // Adding tectonic plates to the map
   tectonicPlates.addTo(map);
-});
+  });
 
   // Del.2 Use d3.json to make a call to get our major earthquake data 
-  d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson").then((data) => {
-    console.log("Hello, this is 4.5 data");
-    L.geoJSON(data, {
-      style: {color: "#703606", weight: 3},
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson").then((data) => {
+  console.log("Hello, this is 4.5 data");
     
+
     // This function returns the style data for each of the earthquakes we plot on
     // the map. We pass the magnitude of the earthquake into two separate functions
     // to calculate the color and radius.
-   function styleInfo(feature) {
-      return {
-        opacity: 1,
-        fillOpacity: 1,
-        fillColor: getColor(feature.properties.mag),
-        color: "#000000",
-        radius: getRadius(feature.properties.mag),
-        stroke: true,
-        weight: 0.5
+  function styleInfo(feature) {
+    return {
+      opacity: 1,
+      fillOpacity: 1,
+      fillColor: getColor(feature.properties.mag),
+      color: "#000000",
+      radius: getRadius(feature.properties.mag),
+      stroke: true,
+      weight: 0.5
     };
   }
 
@@ -203,7 +202,9 @@ legend.onAdd = function() {
     if (magnitude > 6) {
       return "#ee9c00";
     }
+    return "#98ee00";
   }
+  
 
   // This function determines the radius of the earthquake marker based on its magnitude.
   // Earthquakes with a magnitude of 0 were being plotted with the wrong radius.
@@ -229,42 +230,8 @@ legend.onAdd = function() {
       layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
     }
   }).addTo(majorQuakes);
-});
+})
   // Then we add the earthquake layer to our map.
   majorQuakes.addTo(map);
+
 });
-  // Here we create a legend control object.
-let legend = L.control({
-  position: "bottomright"
-});
-
-// Then add all the details for the legend
-legend.onAdd = function() {
-  let div = L.DomUtil.create("div", "info legend");
-
-  const magnitudes = [0, 1, 2, 3, 4, 5];
-  const colors = [
-    "#98ee00",
-    "#d4ee00",
-    "#eecc00",
-    "#ee9c00",
-    "#ea822c",
-    "#ea2c2c"
-  ];
-
-// Looping through our intervals to generate a label with a colored square for each interval.
-  //for (var i = 0; i < magnitudes.length; i++) {
-    //console.log(colors[i]);
-    //div.innerHTML +=
-      //"<i style='background: " + colors[i] + "'></i> " +
-      //magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
-    //}
-    //return div;
-  //};
-
-  // Finally, we our legend to the map.
-  //legend.addTo(map);
-
-
-    //}).addTo(majorQuakes);
-//});
